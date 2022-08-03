@@ -15,9 +15,9 @@ final class SearchPresenter {
         interactor?.searchStock(with: query)
     }
     
-    weak var searchResult: SearchResultVC?
+    weak var view: SearchViewController?
     func setSearchResults(with stocks: [TableViewModel]) {
-        searchResult?.searchResults = stocks
+        view?.searchResults = stocks
     }
     
     // MARK: - View

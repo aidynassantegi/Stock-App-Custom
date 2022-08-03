@@ -26,9 +26,9 @@ class FavoritesVC: UIViewController {
 	
 	func configureTable() {
 		tableVCView.translatesAutoresizingMaskIntoConstraints = false
-		let vc = StocksTableVC()
-		vc.stocks = stocks
-		add(childVC: vc, to: tableVCView)
+//		let vc = UIViewController()
+//		vc.stocks = stocks
+//		add(childVC: vc, to: tableVCView)
 	}
 
 	func configureUI() {

@@ -61,14 +61,14 @@ class StockChartView: UIView {
         for index in 0...viewModel.data.count - 1 {
             entries.append(.init(x: viewModel.timeStamp[index], y: viewModel.data[index]))
         }
-        
+
         chartView.rightAxis.enabled = viewModel.showAxis
 //        chartView.leftAxis.enabled =
         chartView.legend.enabled = viewModel.showLegend
         
         let dataSet = LineChartDataSet(entries: entries, label: "7 Days")
         let colorTop = viewModel.fillColor.cgColor
-        let colorBottom = UIColor.white.cgColor
+        let colorBottom = UIColor.systemBackground.cgColor
         let gradientColors = [colorTop, colorBottom] as CFArray // Colors of the gradient
         let colorLocations:[CGFloat] = [0.9, 0.0] // Positioning of the gradient
         let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(),
@@ -89,4 +89,6 @@ extension StockChartView: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         delegate?.showValue(x: entry.x, y: entry.y)
     }
+    
+    
 }

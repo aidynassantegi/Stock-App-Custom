@@ -20,8 +20,6 @@ protocol StockListViewOutput: AnyObject {
 }
 
 class StockVC: UIViewController, FloatingPanelControllerDelegate {
-	
-   // private var stockSymbols: [String] = ["AAPL", "MSFT", "GOOG", "AMZN", "TSLA", "META", "NVDA", "KO", "NFLX", "DHR", "VZ"]
         
     private var stocksMap: [String: [CandleStick]] = [:]
     
@@ -61,7 +59,6 @@ class StockVC: UIViewController, FloatingPanelControllerDelegate {
     
 	func configureUI() {
 		view.backgroundColor = .systemBackground
-		
 		view.addSubview(tableView)
 		NSLayoutConstraint.activate([
 			tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

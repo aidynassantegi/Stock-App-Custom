@@ -8,29 +8,21 @@
 import Foundation
 
 final class SearchModuleAssemble {
-    func assemble() ->  SearchVC {
+    func assemble() ->  SearchViewController {
         let apiManager = APIManager()
         
         let presenter = SearchPresenter()
         let interactor = SearchInteractor(requestManager: apiManager)
+        let view = SearchViewController()
+        
+        view.presenter = presenter
         
         presenter.interactor = interactor
+        presenter.view = view
+        
         interactor.presenter = presenter
         
-        let searchVC = SearchVC()
-        let searchedCollectionVC = SearchedColectionVC()
-        let searchVCManager = SearchVCManager()
-        let searchResultVC = SearchResultVC()
         
-        searchVC.searchResultVC = searchResultVC
-        searchVC.searchedColectionVC = searchedCollectionVC
-        searchVC.searchManager = searchVCManager
-        
-        searchVCManager.presenter = presenter
-        
-        presenter.searchResult = searchResultVC
-        presenter.searchedColectionVC = searchedCollectionVC
-        
-        return searchVC
+        return view
     }
 }
