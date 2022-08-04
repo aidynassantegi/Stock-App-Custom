@@ -11,15 +11,13 @@ protocol SearchViewInput: AnyObject {
     func setSearcResults(with stocks: [TableViewModel])
 }
 
-protocol SearchViewOutput: AnyObject {
-    func searchFor(query: String)
-}
-
 class SearchViewController: UIViewController, SearchViewInput {
     
     var output: SearchViewOutput?
     
     var searchManager: SearchManager!
+    
+    var searchResults: [TableViewModel] = []
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -28,7 +26,7 @@ class SearchViewController: UIViewController, SearchViewInput {
         return tableView
     }()
     
-    var searchResults: [TableViewModel] = []
+    
     
     func setSearcResults(with stocks: [TableViewModel]) {
         searchResults = stocks
@@ -43,6 +41,11 @@ class SearchViewController: UIViewController, SearchViewInput {
         configureSearchVC()
 //        configureSearchedBeforeCV()
         setupTableView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
     }
     
     func configureSearchVC() {
@@ -75,35 +78,20 @@ class SearchViewController: UIViewController, SearchViewInput {
 //        ])
 //    }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
-    }
-    
     private func setupTableView() {
         view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
+        searchManager.setCellWithStock = { [weak self] index in
+            self?.searchResults[index]
+        }
+        searchManager.searchResultCount = { [ weak self ] in
+            self?.searchResults.count ?? 0
+        }
+        tableView.delegate = searchManager
+        tableView.dataSource = searchManager
     }
-
 }
 
-extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        searchResults.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: StockTableViewCell.reuseId,
-            for: indexPath) as! StockTableViewCell
-        
-        cell.configure(with: searchResults[indexPath.row], index: indexPath.row)
-        
-        return cell
-    }
-    
-}
+
 
 
 

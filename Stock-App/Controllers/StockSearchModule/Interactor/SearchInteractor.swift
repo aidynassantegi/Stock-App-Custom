@@ -7,9 +7,14 @@
 
 import Foundation
 
-final class SearchInteractor {
+protocol SearchInteractorInput: AnyObject {
+    func searchStock(with query: String)
+}
+
+final class SearchInteractor: SearchInteractorInput {
     
-    weak var presenter: SearchPresenter?
+    weak var output: SearchInteractorOutput?
+    
     
     func searchStock(with query: String) {
         requestManager.perform(SearchSymbolsRequest(query: query))
@@ -79,7 +84,7 @@ final class SearchInteractor {
                                                     showAxis: false, fillColor: changePercentage < 0 ? .systemRed : .systemGreen, timeStamp: candleStick.reversed().map { $0.date.timeIntervalSince1970})
                                   ))
         }
-        presenter?.setSearchResults(with: viewModel)
+        output?.setSearchResults(with: viewModel)
     }
     
 }

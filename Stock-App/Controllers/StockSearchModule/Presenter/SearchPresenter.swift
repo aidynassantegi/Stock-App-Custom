@@ -7,10 +7,18 @@
 
 import Foundation
 
-final class SearchPresenter: SearchViewOutput {
+protocol SearchViewOutput: AnyObject {
+    func searchFor(query: String)
+}
+
+protocol SearchInteractorOutput: AnyObject {
+    func setSearchResults(with stocks: [TableViewModel])
+}
+
+final class SearchPresenter: SearchViewOutput, SearchInteractorOutput {
     
     // MARK: - Interactor
-    var interactor: SearchInteractor?
+    var interactor: SearchInteractorInput?
     func searchFor(query: String) {
         interactor?.searchStock(with: query)
     }

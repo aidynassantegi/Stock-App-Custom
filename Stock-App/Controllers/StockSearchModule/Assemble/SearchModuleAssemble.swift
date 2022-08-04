@@ -22,7 +22,7 @@ final class SearchModuleAssemble {
         presenter.interactor = interactor
         presenter.view = view
         
-        interactor.presenter = presenter
+        interactor.output = presenter
         
         
         return view

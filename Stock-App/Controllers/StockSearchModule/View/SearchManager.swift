@@ -7,10 +7,13 @@
 
 import UIKit
 
-class SearchManager: NSObject, UISearchResultsUpdating, UISearchBarDelegate {
+class SearchManager: NSObject, UISearchResultsUpdating, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     var searchForQuery: ((String) -> Void)?
     var canselSearch: (() -> Void)?
+    
+    var searchResultCount: (() -> Int)?
+    var setCellWithStock: ((Int) -> TableViewModel?)?
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let query = searchController.searchBar.text,
@@ -29,5 +32,19 @@ class SearchManager: NSObject, UISearchResultsUpdating, UISearchBarDelegate {
               !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
 
         searchForQuery?(query)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        searchResultCount?() ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: StockTableViewCell.reuseId,
+            for: indexPath) as! StockTableViewCell
+        if let stock = setCellWithStock?(indexPath.row) {
+            cell.configure(with: stock, index: indexPath.row)
+        }
+        return cell
     }
 }

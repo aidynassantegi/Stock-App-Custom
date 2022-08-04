@@ -532,8 +532,8 @@
 			isa = PBXGroup;
 			children = (
 				5996A6612897E07C004A15BB /* Assemble */,
-				5996A65E2897E00D004A15BB /* Presenter */,
 				5996A6542897DE64004A15BB /* Interactor */,
+				5996A65E2897E00D004A15BB /* Presenter */,
 				5996A6572897DF75004A15BB /* View */,
 			);
 			path = StockSearchModule;
