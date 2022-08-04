@@ -13,9 +13,11 @@ final class SearchModuleAssemble {
         
         let presenter = SearchPresenter()
         let interactor = SearchInteractor(requestManager: apiManager)
-        let view = SearchViewController()
         
-        view.presenter = presenter
+        let view = SearchViewController()
+        let searchManager = SearchManager()
+        view.output = presenter
+        view.searchManager = searchManager
         
         presenter.interactor = interactor
         presenter.view = view

@@ -7,9 +7,19 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+protocol SearchViewInput: AnyObject {
+    func setSearcResults(with stocks: [TableViewModel])
+}
+
+protocol SearchViewOutput: AnyObject {
+    func searchFor(query: String)
+}
+
+class SearchViewController: UIViewController, SearchViewInput {
     
-    var presenter: SearchPresenter?
+    var output: SearchViewOutput?
+    
+    var searchManager: SearchManager!
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -18,11 +28,12 @@ class SearchViewController: UIViewController {
         return tableView
     }()
     
-    var searchResults: [TableViewModel] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+    var searchResults: [TableViewModel] = []
+    
+    func setSearcResults(with stocks: [TableViewModel]) {
+        searchResults = stocks
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
 
@@ -35,10 +46,18 @@ class SearchViewController: UIViewController {
     }
     
     func configureSearchVC() {
+        searchManager.searchForQuery = { [weak self] query in
+            self?.output?.searchFor(query: query)
+        }
+        searchManager.canselSearch = { [weak self] in
+            let _ = self?.searchResults.first
+            self?.searchResults = []
+            self?.tableView.reloadData()
+        }
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "Search for a stock"
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = searchManager
+        searchController.searchResultsUpdater = searchManager
         navigationItem.searchController = searchController
     }
 
@@ -84,30 +103,9 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    
 }
 
-extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let query = searchController.searchBar.text,
-              !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-//        presenter?.searchFor(query: query)
-        
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        guard let lastSearch = searchBar.text,
-                !lastSearch.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        searchResults = []
-        tableView.reloadData()
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let query = searchBar.text,
-              !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        presenter?.searchFor(query: query)
-    }
-}
+
+
 
 

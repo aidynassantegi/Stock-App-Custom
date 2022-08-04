@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SearchPresenter {
+final class SearchPresenter: SearchViewOutput {
     
     // MARK: - Interactor
     var interactor: SearchInteractor?
@@ -15,9 +15,9 @@ final class SearchPresenter {
         interactor?.searchStock(with: query)
     }
     
-    weak var view: SearchViewController?
+    weak var view: SearchViewInput?
     func setSearchResults(with stocks: [TableViewModel]) {
-        view?.searchResults = stocks
+        view?.setSearcResults(with: stocks)
     }
     
     // MARK: - View
