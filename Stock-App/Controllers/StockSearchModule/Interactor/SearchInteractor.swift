@@ -5,7 +5,8 @@
 //  Created by Aidyn Assan on 01.08.2022.
 //
 
-import Foundation
+import UIKit
+import CoreData
 
 protocol SearchInteractorInput: AnyObject {
     func searchStock(with query: String)
@@ -29,8 +30,34 @@ final class SearchInteractor: SearchInteractorInput {
             case .failure(let error): print(error.localizedDescription)
             }
         }
+        save(name: query)
     }
 
+    private func save(name: String) {
+      
+      guard let appDelegate =
+        UIApplication.shared.delegate as? AppDelegate else {
+        return
+      }
+      
+      let managedContext =
+        appDelegate.persistentContainer.viewContext
+      
+      let entity =
+        NSEntityDescription.entity(forEntityName: "LastSearchedStocks",
+                                   in: managedContext)!
+      
+      let person = NSManagedObject(entity: entity,
+                                   insertInto: managedContext)
+      
+      person.setValue(name, forKeyPath: "symbol")
+      
+      do {
+        try managedContext.save()
+      } catch let error as NSError {
+        print("Could not save. \(error), \(error.userInfo)")
+      }
+    }
     
     
     private var requestManager = APIManager()

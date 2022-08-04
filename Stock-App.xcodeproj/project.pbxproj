@@ -48,6 +48,11 @@
 		5970B78D289A496500AAC039 /* StockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5970B77E289A496500AAC039 /* StockVC.swift */; };
 		5970B78E289A496500AAC039 /* StockListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5970B780289A496500AAC039 /* StockListRouter.swift */; };
 		59741B37289B956B003DFF8C /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59741B36289B956B003DFF8C /* SearchManager.swift */; };
+		59741B3A289BA84E003DFF8C /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59741B39289BA84E003DFF8C /* SearchRouter.swift */; };
+		598F5C37289BD73A00CFA870 /* Stock-App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 598F5C35289BD73A00CFA870 /* Stock-App.xcdatamodeld */; };
+		598F5C42289BE0F900CFA870 /* LastSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F5C41289BE0F900CFA870 /* LastSearchInteractor.swift */; };
+		598F5C44289BE90500CFA870 /* LastSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F5C43289BE90500CFA870 /* LastSearchPresenter.swift */; };
+		598F5C46289BF0B400CFA870 /* LastSearchAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F5C45289BF0B400CFA870 /* LastSearchAssembler.swift */; };
 		5996A5B72897BAEB004A15BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5996A5B62897BAEB004A15BB /* AppDelegate.swift */; };
 		5996A5B92897BAEB004A15BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5996A5B82897BAEB004A15BB /* SceneDelegate.swift */; };
 		5996A5BB2897BAEB004A15BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5996A5BA2897BAEB004A15BB /* ViewController.swift */; };
@@ -75,7 +80,7 @@
 		5996A64F2897DC6C004A15BB /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 5996A64E2897DC6C004A15BB /* FloatingPanel */; };
 		5996A6522897DC81004A15BB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5996A6512897DC81004A15BB /* SDWebImage */; };
 		5996A6562897DE78004A15BB /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5996A6552897DE78004A15BB /* SearchInteractor.swift */; };
-		5996A65B2897DFBB004A15BB /* SearchedCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5996A65A2897DFBB004A15BB /* SearchedCollectionVC.swift */; };
+		5996A65B2897DFBB004A15BB /* LastSearchedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5996A65A2897DFBB004A15BB /* LastSearchedViewController.swift */; };
 		5996A65D2897DFE8004A15BB /* SearchedCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5996A65C2897DFE8004A15BB /* SearchedCVCell.swift */; };
 		5996A6602897E01D004A15BB /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5996A65F2897E01D004A15BB /* SearchPresenter.swift */; };
 		5996A6632897E093004A15BB /* SearchModuleAssemble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5996A6622897E093004A15BB /* SearchModuleAssemble.swift */; };
@@ -123,6 +128,11 @@
 		5970B77E289A496500AAC039 /* StockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockVC.swift; sourceTree = "<group>"; };
 		5970B780289A496500AAC039 /* StockListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockListRouter.swift; sourceTree = "<group>"; };
 		59741B36289B956B003DFF8C /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
+		59741B39289BA84E003DFF8C /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
+		598F5C36289BD73A00CFA870 /* Stock-App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Stock-App.xcdatamodel"; sourceTree = "<group>"; };
+		598F5C41289BE0F900CFA870 /* LastSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSearchInteractor.swift; sourceTree = "<group>"; };
+		598F5C43289BE90500CFA870 /* LastSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSearchPresenter.swift; sourceTree = "<group>"; };
+		598F5C45289BF0B400CFA870 /* LastSearchAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSearchAssembler.swift; sourceTree = "<group>"; };
 		5996A5B32897BAEB004A15BB /* Stock-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stock-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5996A5B62897BAEB004A15BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5996A5B82897BAEB004A15BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,7 +159,7 @@
 		5996A6272897DBA7004A15BB /* StockInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockInfoVC.swift; sourceTree = "<group>"; };
 		5996A6282897DBA7004A15BB /* FavoritesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		5996A6552897DE78004A15BB /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
-		5996A65A2897DFBB004A15BB /* SearchedCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedCollectionVC.swift; sourceTree = "<group>"; };
+		5996A65A2897DFBB004A15BB /* LastSearchedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSearchedViewController.swift; sourceTree = "<group>"; };
 		5996A65C2897DFE8004A15BB /* SearchedCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedCVCell.swift; sourceTree = "<group>"; };
 		5996A65F2897E01D004A15BB /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		5996A6622897E093004A15BB /* SearchModuleAssemble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModuleAssemble.swift; sourceTree = "<group>"; };
@@ -437,6 +447,57 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		59741B38289BA71B003DFF8C /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				59741B39289BA84E003DFF8C /* SearchRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		598F5C38289BDEF100CFA870 /* LastSearchedStocks */ = {
+			isa = PBXGroup;
+			children = (
+				598F5C39289BDF0C00CFA870 /* Assembler */,
+				598F5C3D289BDF3200CFA870 /* Router */,
+				598F5C3A289BDF1600CFA870 /* Interactor */,
+				598F5C3B289BDF2000CFA870 /* Presenter */,
+				59DC5C772899161100E29DE6 /* View */,
+			);
+			path = LastSearchedStocks;
+			sourceTree = "<group>";
+		};
+		598F5C39289BDF0C00CFA870 /* Assembler */ = {
+			isa = PBXGroup;
+			children = (
+				598F5C45289BF0B400CFA870 /* LastSearchAssembler.swift */,
+			);
+			path = Assembler;
+			sourceTree = "<group>";
+		};
+		598F5C3A289BDF1600CFA870 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				598F5C41289BE0F900CFA870 /* LastSearchInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		598F5C3B289BDF2000CFA870 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				598F5C43289BE90500CFA870 /* LastSearchPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		598F5C3D289BDF3200CFA870 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		5996A5AA2897BAEB004A15BB = {
 			isa = PBXGroup;
 			children = (
@@ -463,6 +524,7 @@
 				5996A6042897DBA7004A15BB /* Controllers */,
 				5996A5BA2897BAEB004A15BB /* ViewController.swift */,
 				5996A5CA2897BB0D004A15BB /* Support */,
+				598F5C35289BD73A00CFA870 /* Stock-App.xcdatamodeld */,
 			);
 			path = "Stock-App";
 			sourceTree = "<group>";
@@ -531,10 +593,12 @@
 		5996A6532897DD6E004A15BB /* StockSearchModule */ = {
 			isa = PBXGroup;
 			children = (
+				598F5C38289BDEF100CFA870 /* LastSearchedStocks */,
 				5996A6612897E07C004A15BB /* Assemble */,
+				5996A6572897DF75004A15BB /* View */,
 				5996A6542897DE64004A15BB /* Interactor */,
 				5996A65E2897E00D004A15BB /* Presenter */,
-				5996A6572897DF75004A15BB /* View */,
+				59741B38289BA71B003DFF8C /* Router */,
 			);
 			path = StockSearchModule;
 			sourceTree = "<group>";
@@ -552,7 +616,6 @@
 			children = (
 				5996A6262897DBA7004A15BB /* SearchViewController.swift */,
 				59741B36289B956B003DFF8C /* SearchManager.swift */,
-				59DC5C772899161100E29DE6 /* CollectionView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -573,13 +636,13 @@
 			path = Assemble;
 			sourceTree = "<group>";
 		};
-		59DC5C772899161100E29DE6 /* CollectionView */ = {
+		59DC5C772899161100E29DE6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5996A65A2897DFBB004A15BB /* SearchedCollectionVC.swift */,
+				5996A65A2897DFBB004A15BB /* LastSearchedViewController.swift */,
 				5996A65C2897DFE8004A15BB /* SearchedCVCell.swift */,
 			);
-			path = CollectionView;
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -670,9 +733,11 @@
 				5970B78A289A496500AAC039 /* StockListInteractor.swift in Sources */,
 				5996A63B2897DBA7004A15BB /* SearchViewController.swift in Sources */,
 				5996A6602897E01D004A15BB /* SearchPresenter.swift in Sources */,
+				598F5C37289BD73A00CFA870 /* Stock-App.xcdatamodeld in Sources */,
 				5970B741289A451C00AAC039 /* FinancialDataAssembly.swift in Sources */,
 				5996A63C2897DBA7004A15BB /* StockInfoVC.swift in Sources */,
 				5996A5E12897BEBE004A15BB /* MarketDataRequest.swift in Sources */,
+				598F5C44289BE90500CFA870 /* LastSearchPresenter.swift in Sources */,
 				5970B746289A451C00AAC039 /* StockDetailsAssembly.swift in Sources */,
 				5970B789289A496500AAC039 /* StockListPresenter.swift in Sources */,
 				5996A5E62897BEBE004A15BB /* APIConstants.swift in Sources */,
@@ -686,6 +751,7 @@
 				5970B73F289A451C00AAC039 /* ChartViewInteractor.swift in Sources */,
 				5970B78D289A496500AAC039 /* StockVC.swift in Sources */,
 				5996A5E22897BEBE004A15BB /* NewsRequest.swift in Sources */,
+				59741B3A289BA84E003DFF8C /* SearchRouter.swift in Sources */,
 				5970B78C289A496500AAC039 /* TableViewDataManager.swift in Sources */,
 				5970B788289A496500AAC039 /* StockListModuleAssembly.swift in Sources */,
 				5970B763289A493000AAC039 /* Stock.swift in Sources */,
@@ -694,7 +760,7 @@
 				5970B760289A493000AAC039 /* CompanyProfile.swift in Sources */,
 				5970B754289A491F00AAC039 /* TimePeriodCollectionViewCell.swift in Sources */,
 				5970B781289A496500AAC039 /* NewsViewAssembly.swift in Sources */,
-				5996A65B2897DFBB004A15BB /* SearchedCollectionVC.swift in Sources */,
+				5996A65B2897DFBB004A15BB /* LastSearchedViewController.swift in Sources */,
 				5996A5E72897BEBE004A15BB /* APIManager.swift in Sources */,
 				5970B756289A491F00AAC039 /* NewsTableHeaderView.swift in Sources */,
 				59741B37289B956B003DFF8C /* SearchManager.swift in Sources */,
@@ -711,11 +777,13 @@
 				5996A6632897E093004A15BB /* SearchModuleAssemble.swift in Sources */,
 				5996A5EA2897BEBE004A15BB /* RequestType.swift in Sources */,
 				5996A5DF2897BEBE004A15BB /* APIError.swift in Sources */,
+				598F5C46289BF0B400CFA870 /* LastSearchAssembler.swift in Sources */,
 				5970B751289A491F00AAC039 /* IntervalCVCell.swift in Sources */,
 				5970B787289A496500AAC039 /* TableViewModel.swift in Sources */,
 				5996A5E42897BEBE004A15BB /* FinancialMetricsRequest.swift in Sources */,
 				5996A5E92897BEBE004A15BB /* DataParserProtocol.swift in Sources */,
 				5970B742289A451C00AAC039 /* FinancialDataPresenter.swift in Sources */,
+				598F5C42289BE0F900CFA870 /* LastSearchInteractor.swift in Sources */,
 				5996A6032897DB9B004A15BB /* CalculateStockDynamic.swift in Sources */,
 				5970B784289A496500AAC039 /* NewsViewController.swift in Sources */,
 				5996A65D2897DFE8004A15BB /* SearchedCVCell.swift in Sources */,
@@ -979,6 +1047,19 @@
 			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		598F5C35289BD73A00CFA870 /* Stock-App.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				598F5C36289BD73A00CFA870 /* Stock-App.xcdatamodel */,
+			);
+			currentVersion = 598F5C36289BD73A00CFA870 /* Stock-App.xcdatamodel */;
+			path = "Stock-App.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5996A5AB2897BAEB004A15BB /* Project object */;
 }

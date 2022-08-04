@@ -14,6 +14,7 @@ class SearchManager: NSObject, UISearchResultsUpdating, UISearchBarDelegate, UIT
     
     var searchResultCount: (() -> Int)?
     var setCellWithStock: ((Int) -> TableViewModel?)?
+    var didSelectStock: ((Int) -> Void)?
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let query = searchController.searchBar.text,
@@ -46,5 +47,9 @@ class SearchManager: NSObject, UISearchResultsUpdating, UISearchBarDelegate, UIT
             cell.configure(with: stock, index: indexPath.row)
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectStock?(indexPath.row)
     }
 }

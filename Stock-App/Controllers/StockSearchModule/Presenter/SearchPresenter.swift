@@ -9,14 +9,15 @@ import Foundation
 
 protocol SearchViewOutput: AnyObject {
     func searchFor(query: String)
+    func showDetails(of stock: String, and companyName: String)
+    func searchedStocks() -> LastSearchedViewController?
 }
 
 protocol SearchInteractorOutput: AnyObject {
     func setSearchResults(with stocks: [TableViewModel])
 }
 
-final class SearchPresenter: SearchViewOutput, SearchInteractorOutput {
-    
+final class SearchPresenter: SearchViewOutput, SearchInteractorOutput, SearchRouterOutput {
     // MARK: - Interactor
     var interactor: SearchInteractorInput?
     func searchFor(query: String) {
@@ -32,17 +33,18 @@ final class SearchPresenter: SearchViewOutput, SearchInteractorOutput {
     
     // Search results
     
+    var router: SearchRouterInput?
+    weak var searchedColection: LastSearchedViewController?
     
-    // Last searched stocks
-    weak var searchedColectionVC: SearchedColectionVC?
-    private var lastSearchedStocks = [String]()
-    func append(lastSearch: String) {
-        lastSearchedStocks.insert(lastSearch, at: 0)
-        searchedColectionVC?.tickets = lastSearchedStocks
+    func searchedStocks() -> LastSearchedViewController? {
+        return LastSearchAssembler().assemble()
+    }
+    func searchedStocks(vc: LastSearchedViewController) {
+        searchedColection = vc
     }
     
-    // Future works with view
-    
-    // MARK: - Router
+    func showDetails(of stock: String, and companyName: String) {
+        router?.openChart(with: stock, and: companyName)
+    }
 }
 

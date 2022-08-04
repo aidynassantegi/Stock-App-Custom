@@ -7,12 +7,28 @@
 
 import UIKit
 
-class SearchedColectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+protocol LastSearchedViewOutput: AnyObject {
+    func viewWillAppear()
+}
+
+protocol LastSearchedViewInput: AnyObject {
+    func set(with symbols: [String])
+}
+
+class LastSearchedViewController: UIViewController, LastSearchedViewInput {
+    
+    
+    
+    var output: LastSearchedViewOutput?
     
     var tickets: [String]? {
         didSet {
             collectionView.reloadData()
         }
+    }
+    
+    func set(with symbols: [String]) {
+        tickets = symbols
     }
     
     let titleLabel: UILabel = {
@@ -52,6 +68,10 @@ class SearchedColectionVC: UIViewController, UICollectionViewDelegate, UICollect
         collectionView.register(SearchedCVCell.self, forCellWithReuseIdentifier: SearchedCVCell.reuseId)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        output?.viewWillAppear()
+    }
+    
     func configureUI() {
         view.addSubview(titleLabel)
         view.addSubview(collectionView)
@@ -68,6 +88,18 @@ class SearchedColectionVC: UIViewController, UICollectionViewDelegate, UICollect
         
     }
     
+    
+}
+
+
+extension LastSearchedViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let label = UILabel()
+        label.text = tickets![indexPath.item]
+        label.font = .boldSystemFont(ofSize: 30)
+        label.sizeToFit()
+        return label.frame.size
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         tickets?.count ?? 0
     }
@@ -76,16 +108,5 @@ class SearchedColectionVC: UIViewController, UICollectionViewDelegate, UICollect
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchedCVCell.reuseId, for: indexPath) as! SearchedCVCell
         cell.set(title: tickets?[indexPath.row] ?? "")
         return cell
-    }
-}
-
-
-extension SearchedColectionVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let label = UILabel()
-        label.text = tickets![indexPath.item]
-        label.font = .boldSystemFont(ofSize: 30)
-        label.sizeToFit()
-        return label.frame.size
     }
 }

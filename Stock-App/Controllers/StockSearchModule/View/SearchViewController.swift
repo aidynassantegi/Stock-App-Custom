@@ -17,10 +17,23 @@ class SearchViewController: UIViewController, SearchViewInput {
     
     var searchManager: SearchManager!
     
-    var searchResults: [TableViewModel] = []
+    var searchResults: [TableViewModel] = [] {
+        didSet {
+            if searchResults.isEmpty {
+                searchedView.isHidden = false
+                tableView.isHidden = true
+            }else {
+                searchedView.isHidden = true
+                tableView.isHidden = false
+            }
+        }
+    }
+    
+    let searchedView = UIView()
     
     private let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.separatorStyle = .none
         tableView.register(StockTableViewCell.self,
                            forCellReuseIdentifier: StockTableViewCell.reuseId)
         return tableView
@@ -39,13 +52,8 @@ class SearchViewController: UIViewController, SearchViewInput {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureSearchVC()
-//        configureSearchedBeforeCV()
+        configureSearchedStocks()
         setupTableView()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
     }
     
     func configureSearchVC() {
@@ -64,30 +72,43 @@ class SearchViewController: UIViewController, SearchViewInput {
         navigationItem.searchController = searchController
     }
 
-//    func configureSearchedBeforeCV() {
-//        guard let searchedColection = searchedColection else { return }
-//        let searchedView = UIView()
-//        add(childVC: searchedColection, to: searchedView)
-//        searchedView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(searchedView)
-//        NSLayoutConstraint.activate([
-//            searchedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            searchedView.heightAnchor.constraint(equalToConstant: 122),
-//            searchedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            searchedView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-//        ])
-//    }
+    func configureSearchedStocks() {
+        tableView.isHidden = true
+        guard let vc = output?.searchedStocks() else { return }
+        
+        add(childVC: vc, to: searchedView)
+        searchedView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(searchedView)
+        NSLayoutConstraint.activate([
+            searchedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchedView.heightAnchor.constraint(equalToConstant: 122),
+            searchedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchedView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
     
     private func setupTableView() {
-        view.addSubview(tableView)
         searchManager.setCellWithStock = { [weak self] index in
             self?.searchResults[index]
         }
         searchManager.searchResultCount = { [ weak self ] in
             self?.searchResults.count ?? 0
         }
+        searchManager.didSelectStock = { [weak self] index in
+            guard let symbol = self?.searchResults[index].symbol else { return }
+            guard let companyName = self?.searchResults[index].companyName else { return }
+            self?.output?.showDetails(of: symbol, and: companyName)
+        }
         tableView.delegate = searchManager
         tableView.dataSource = searchManager
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
 
