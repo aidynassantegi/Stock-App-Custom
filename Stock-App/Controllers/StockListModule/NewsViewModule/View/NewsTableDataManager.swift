@@ -33,6 +33,7 @@ final class NewsTableDataManager: NSObject, UITableViewDelegate, UITableViewData
         header.configure(with: .init(title: newType.title, showButton: true))
         return header
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         NewsTableHeaderView.preferredHeight
     }

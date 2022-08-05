@@ -39,6 +39,7 @@ class FinancialCollectionViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         financialDataViewOutput?.didLoadView()
         collectionView.delegate = financialMetricDataManager
         collectionView.dataSource = financialMetricDataManager
@@ -57,18 +58,8 @@ class FinancialCollectionViewController: UIViewController {
    
 }
     
-//    func configure(chartViewModel: StockChartView.ViewModel, metricViewModels: [MetricCollectionViewEntity]) {
-//        chartView.configure(with: chartViewModel)
-//        chartView.delegate = self
-//        print(showData)
-//        //self.metricViewModels = metricViewModels
-//        collectionView.reloadData()
-//    }
-
-
 extension FinancialCollectionViewController: FinancialDataViewInput {
     func handleObtainedEntity(_ entity: [MetricCollectionViewEntity]) {
-        print("entity \(entity)")
         if financialMetricDataManager != nil {
             financialMetricDataManager?.metricViewModels = entity
         }
@@ -76,16 +67,9 @@ extension FinancialCollectionViewController: FinancialDataViewInput {
     }
     
     func handleObtainedMetrics(_ metrics: Metrics) {
-        print(metrics)
+       // print(metrics)
     }
 }
 
-//extension StockDetailsHeaderView: ChartData {
-//    func showValue(x: Double, y: Double) {
-//        let date = Date(timeIntervalSince1970: x)
-//        showData = "\(date.converToMonthYearHourFormat()) \(y) USD"
-//        label.text = showData
-//    }
-//}
 
 

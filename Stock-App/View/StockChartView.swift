@@ -8,8 +8,10 @@
 import UIKit
 import Charts
 
+
 protocol ChartData: AnyObject {
     func showValue(x: Double, y: Double)
+    func removeText(_ deselected: Bool)
 }
 
 class StockChartView: UIView {
@@ -36,6 +38,8 @@ class StockChartView: UIView {
         return chartView
     }()
     
+    private let customMarkerView = CustomMarkerView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(chartView)
@@ -56,32 +60,46 @@ class StockChartView: UIView {
     }
     
     func configure(with viewModel: ViewModel) {
+        chartView.notifyDataSetChanged()
+        
         var entries = [ChartDataEntry]()
                 
         for index in 0...viewModel.data.count - 1 {
             entries.append(.init(x: viewModel.timeStamp[index], y: viewModel.data[index]))
         }
-
-        chartView.rightAxis.enabled = viewModel.showAxis
-//        chartView.leftAxis.enabled =
-        chartView.legend.enabled = viewModel.showLegend
         
-        let dataSet = LineChartDataSet(entries: entries, label: "7 Days")
+      //  chartView.rightAxis.enabled = viewModel.showAxis
+        chartView.leftAxis.enabled = viewModel.showAxis
+        chartView.xAxis.enabled = viewModel.showAxis
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.valueFormatter = CustomAxis()
+        
+        customMarkerView.chartView = chartView
+        chartView.marker = customMarkerView
+
+        let dataSet = LineChartDataSet(entries: entries, label: "")
         let colorTop = viewModel.fillColor.cgColor
         let colorBottom = UIColor.systemBackground.cgColor
         let gradientColors = [colorTop, colorBottom] as CFArray // Colors of the gradient
-        let colorLocations:[CGFloat] = [0.9, 0.0] // Positioning of the gradient
+        let colorLocations:[CGFloat] = [0.75, 0.0] // Positioning of the gradient
+        
         let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(),
                                        colors: gradientColors, locations: colorLocations) // Gradient Object
         dataSet.fill = LinearGradientFill(gradient: gradient!, angle: 90.0) // Set the Gradient
-        //dataSet.fillColor = viewModel.fillColor
+        
         dataSet.drawFilledEnabled = true
         dataSet.drawIconsEnabled = false
         dataSet.drawValuesEnabled = false
         dataSet.drawCirclesEnabled = false
+        
         dataSet.setColor(viewModel.fillColor)
+        dataSet.drawHorizontalHighlightIndicatorEnabled = false
+        dataSet.highlightColor = viewModel.fillColor
+        dataSet.highlightLineWidth = 1.5
+        
         let data = LineChartData(dataSet: dataSet)
         chartView.data = data
+        
     }
 }
 
@@ -90,5 +108,9 @@ extension StockChartView: ChartViewDelegate {
         delegate?.showValue(x: entry.x, y: entry.y)
     }
     
-    
+    func chartViewDidEndPanning(_ chartView: ChartViewBase) {
+        delegate?.removeText(true)
+        chartView.highlightValue(nil, callDelegate: false)
+    }
+
 }

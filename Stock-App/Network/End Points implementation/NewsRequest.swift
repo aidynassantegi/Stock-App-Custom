@@ -37,7 +37,7 @@ struct MarketNewsRequest: RequestProtocol {
         case .company(let symbol):
             let today = Date()
             let oneMonthBack = today.addingTimeInterval(-(3600 * 24 * 30))
-//            params = ["symbol" : symbol, "from" : DateFormatter.newsDateFormatter.string(from: oneMonthBack), "to" : DateFormatter.newsDateFormatter.string(from: today)]
+            params = ["symbol" : symbol, "from" : DateFormatter.newsDateFormatter.string(from: oneMonthBack), "to" : DateFormatter.newsDateFormatter.string(from: today)]
         }
         return params
     }

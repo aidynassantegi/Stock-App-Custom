@@ -20,6 +20,10 @@ final class StockDetailsAssembly{
     
         let vc = StockDetailsViewController()
         
+        let shortInfoView = ShortInfoAssembly().assemble { input in
+            input.configure(with: stockSymbol, and: companyName)
+        }
+        
         let chartView = ChartViewAssembly().assemble { input in
             input.configure(with: stockSymbol)
         }
@@ -28,8 +32,16 @@ final class StockDetailsAssembly{
             input.configure(with: stockSymbol, and: companyName)
         }
         
+        let newsVc = NewsViewAssembly().assembly(newsType: .company(symbol: stockSymbol))
+        
+        vc.symbol = stockSymbol
+        vc.companyName = companyName
+        
+        vc.shortInfoView =  shortInfoView
         vc.chartView = chartView
         vc.collectionView = collectionView
+        vc.newsController = newsVc
+        
         return vc
     }
 }
